@@ -1,0 +1,24 @@
+<!-- dialog-box.component.html -->
+<h1 mat-dialog-title><strong>Modificar Registro</strong></h1>
+<div mat-dialog-content [formGroup]="form">
+  <mat-form-field>
+    <mat-label>Nombre</mat-label>
+    <input matInput placeholder="name" formControlName="name" />
+    <mat-error *ngIf="form.controls['name'].hasError('name')">
+      name is <strong>name</strong>
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Stock</mat-label>
+    <input matInput placeholder="stock" formControlName="stock" />
+    <mat-error *ngIf="form.controls['stock'].hasError('stock')">
+      stock is <strong>stock</strong>
+    </mat-error>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="doAction()">Guardar</button>
+  <button mat-button (click)="closeDialog()" mat-flat-button color="warn">
+    Cancel
+  </button>
+</div>
