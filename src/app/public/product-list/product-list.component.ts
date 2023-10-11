@@ -19,8 +19,6 @@ export class ProductListComponent implements OnInit {
       this.dataSource.data = res;
     });
   }
-
-  // This is the method which get called from your filter input
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
