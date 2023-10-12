@@ -1,6 +1,8 @@
 import { Component, Inject, inject } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MaterialListItem } from 'src/app/_interfaces/material-list-item';
+import { MaterialsService } from 'src/app/_services/materials.service';
 
 @Component({
   selector: 'app-material-add-dialog',
@@ -14,7 +16,10 @@ export class MaterialAddDialogComponent {
     stock: [null, Validators.required],
   });
 
-  constructor(public dialogRef: MatDialogRef<MaterialAddDialogComponent>) {}
+  constructor(
+    public dialogRef: MatDialogRef<MaterialAddDialogComponent>,
+    private matService: MaterialsService
+  ) {}
 
   doAction() {
     console.log(this.form);
@@ -22,12 +27,17 @@ export class MaterialAddDialogComponent {
       return;
     }
 
-    alert('Thanks! pase');
-    this.dialogRef.close({ event: 'Add' });
+    let material: any = {
+      name: this.form.get('name')?.value,
+      stock: this.form.get('stock')?.value,
+    };
+
+    this.matService.create(material).subscribe((x) => {
+      this.dialogRef.close({ event: 'Add' });
+    });
   }
 
   closeDialog() {
     this.dialogRef.close({ event: 'Cancel' });
   }
-  
 }

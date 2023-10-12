@@ -31,9 +31,8 @@ export class LoginComponent {
     console.log(loginData);
 
     this.authService.authenticateUser(loginData).subscribe((result) => {
-      console.log(result?.token);
-
-      localStorage.setItem('access_token', JSON.stringify(result?.token));
+      console.log(result.token);
+      localStorage.setItem('access_token', JSON.stringify(result.token));
       this.router.navigate(['/public/products']);
     });
   }

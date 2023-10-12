@@ -1,28 +1,34 @@
 import { Injectable } from '@angular/core';
 import { ProductListItem } from '../_interfaces/product-list-item';
 import { Observable, of } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { Component } from '@angular/core';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProductsService {
-  constructor() {}
+  basePath = environment.apiUrl + 'api/Products';
+  constructor(private http: HttpClient) {}
 
-  getItems(): Observable<ProductListItem[]> {
+  getAll(filter: string): Observable<ProductListItem[]> {
     // TODO: replace this with real data from your application
-    let EXAMPLE_DATA: ProductListItem[] = [
-      { id: 1, name: 'Hydrogen', price: 12200 },
-      { id: 2, name: 'Helium', price: 10330 },
-      { id: 3, name: 'Lithium', price: 10330 },
-      { id: 4, name: 'Beryllium', price: 11100 },
-      { id: 5, name: 'Boron', price: 1040 },
-      { id: 6, name: 'Carbon', price: 1010 },
-      { id: 7, name: 'Nitrogen', price: 1200 },
-      { id: 8, name: 'Oxygen', price: 1010 },
-      { id: 9, name: 'Fluorine', price: 1020 },
-      { id: 20, name: 'Calcium', price: 1001 },
-    ];
+    return this.http.get<any>(this.basePath + '/All?filter=' + filter);
+  }
 
-    return of(EXAMPLE_DATA);
+  getCart(filter: string): Observable<ProductListItem[]> {
+    // TODO: replace this with real data from your application
+    return this.http.get<any>(this.basePath + '/Cart?filter=' + filter);
+  }
+
+  create(producto: ProductListItem): Observable<any> {
+    return this.http.post<any>(this.basePath + '/Create', producto);
+  }
+  update(producto: ProductListItem): Observable<any> {
+    return this.http.put<any>(
+      this.basePath + `/Update/${producto.id}`,
+      producto
+    );
   }
 }

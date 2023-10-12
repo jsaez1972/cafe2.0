@@ -14,13 +14,13 @@ import { MaterialEditDialogComponent } from '../material-edit-dialog/material-ed
   styleUrls: ['./material-list.component.scss'],
 })
 export class MaterialListComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'name', 'stock','action'];
+  displayedColumns: string[] = ['id', 'name', 'stock', 'action'];
   dataSource1: MaterialListItem[] = [];
   dataSource = new MatTableDataSource(this.dataSource1);
 
   constructor(private matService: MaterialsService, public dialog: MatDialog) {}
   ngOnInit(): void {
-    this.matService.getItems().subscribe((res) => {
+    this.matService.getAll('').subscribe((res) => {
       this.dataSource.data = res;
     });
   }
@@ -38,7 +38,7 @@ export class MaterialListComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result.event == 'Add')
-        this.matService.getItems().subscribe((res) => {
+        this.matService.getAll('').subscribe((res) => {
           this.dataSource.data = res;
         });
     });
@@ -52,7 +52,7 @@ export class MaterialListComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result.event == 'Edit')
-        this.matService.getItems().subscribe((res) => {
+        this.matService.getAll('').subscribe((res) => {
           this.dataSource.data = res;
         });
     });

@@ -1,28 +1,27 @@
 import { Injectable } from '@angular/core';
 import { MaterialListItem } from '../_interfaces/material-list-item';
 import { Observable, of } from 'rxjs';
-
+import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root',
 })
 export class MaterialsService {
-  constructor() {}
+  basePath = environment.apiUrl + 'api/Materials';
+  constructor(private http: HttpClient) {}
 
-  getItems(): Observable<MaterialListItem[]> {
-    // TODO: replace this with real data from your application
-    let EXAMPLE_DATA: MaterialListItem[] = [
-      { id: 1, name: 'palta', stock: 12200 },
-      { id: 2, name: 'bebida', stock: 10330 },
-      { id: 3, name: 'Lithium', stock: 10330 },
-      { id: 4, name: 'Beryllium', stock: 11100 },
-      { id: 5, name: 'Boron', stock: 1040 },
-      { id: 6, name: 'Carbon', stock: 1010 },
-      { id: 7, name: 'Nitrogen', stock: 1200 },
-      { id: 8, name: 'Oxygen', stock: 1010 },
-      { id: 9, name: 'Fluorine', stock: 1020 },
-      { id: 20, name: 'Calcium', stock: 1001 },
-    ];
+  getAll(filter: string): Observable<MaterialListItem[]> {
+    return this.http.get<any>(this.basePath + `/All?filter=${filter}`);
+  }
 
-    return of(EXAMPLE_DATA);
+  create(material: MaterialListItem): Observable<any> {
+    return this.http.post<any>(this.basePath + '/Create', material);
+  }
+
+  update(material: MaterialListItem): Observable<any> {
+    return this.http.put<any>(
+      this.basePath + `/Update/${material.id}`,
+      material
+    );
   }
 }

@@ -19,7 +19,7 @@ export class ProductListComponent implements OnInit {
 
   constructor(private prodService: ProductsService, public dialog: MatDialog) {}
   ngOnInit(): void {
-    this.prodService.getItems().subscribe((res) => {
+    this.prodService.getAll('').subscribe((res) => {
       this.dataSource.data = res;
     });
   }
@@ -37,7 +37,7 @@ export class ProductListComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result.event == 'Add')
-        this.prodService.getItems().subscribe((res) => {
+        this.prodService.getAll('').subscribe((res) => {
           this.dataSource.data = res;
         });
     });
@@ -51,7 +51,7 @@ export class ProductListComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result.event == 'Edit')
-        this.prodService.getItems().subscribe((res) => {
+        this.prodService.getAll('').subscribe((res) => {
           this.dataSource.data = res;
         });
     });

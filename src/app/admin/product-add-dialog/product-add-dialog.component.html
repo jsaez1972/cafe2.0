@@ -2,6 +2,15 @@
 <h1 mat-dialog-title><strong>Agregar Registro</strong></h1>
 <div mat-dialog-content [formGroup]="form">
   <mat-form-field>
+    <mat-label>Categoria</mat-label>
+    <mat-select formControlName="idcategory">
+      <mat-option *ngFor="let cat of categorias" [value]="cat.id">
+        {{ cat.name }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field>
     <mat-label>Nombre</mat-label>
     <input matInput placeholder="name" formControlName="name" />
     <mat-error *ngIf="form.controls['name'].hasError('name')">
