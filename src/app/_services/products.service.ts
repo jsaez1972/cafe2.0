@@ -14,12 +14,16 @@ export class ProductsService {
 
   getAll(filter: string): Observable<ProductListItem[]> {
     // TODO: replace this with real data from your application
-    return this.http.get<any>(this.basePath + '/All?filter=' + filter);
+    return this.http.get<any>(this.basePath + `/All?filter=${filter}`);
   }
 
   getCart(filter: string): Observable<ProductListItem[]> {
     // TODO: replace this with real data from your application
-    return this.http.get<any>(this.basePath + '/Cart?filter=' + filter);
+    return this.http.get<any>(this.basePath + `/Cart?filter=${filter}`);
+  }
+
+  getPorId(id: number): Observable<ProductListItem> {
+    return this.http.get<any>(this.basePath + `/${id}`);
   }
 
   create(producto: ProductListItem): Observable<any> {

@@ -1,0 +1,47 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>{{ nameProduct }}</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="row">
+      <div class="col">
+        <mat-form-field>
+          <mat-label>Nombre</mat-label>
+          <input
+            matInput
+            placeholder="quantity"
+            formControlName="quantity"
+            type="number"
+          />
+        </mat-form-field>
+      </div>
+      <div class="col">
+        <mat-form-field>
+          <mat-label>Numero Mesa</mat-label>
+          <input
+            matInput
+            placeholder="mesa"
+            formControlName="mesa"
+            type="number"
+          />
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <mat-form-field>
+          <mat-label>Observacion</mat-label>
+          <textarea placeholder="obs" formControlName="obs"></textarea>
+        </mat-form-field>
+      </div>
+    </div>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-button style="background-color: blue; color: white">
+      LIKE
+    </button>
+    <button mat-button style="background-color: green; color: white">
+      SHARE
+    </button>
+  </mat-card-actions>
+</mat-card>

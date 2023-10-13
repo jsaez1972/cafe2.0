@@ -1,5 +1,7 @@
+import { identifierName } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
 import { ProductListItem } from 'src/app/_interfaces/product-list-item';
 import { ProductsService } from 'src/app/_services/products.service';
 
@@ -13,7 +15,7 @@ export class ProductListComponent implements OnInit {
   dataSource1: ProductListItem[] = [];
   dataSource = new MatTableDataSource(this.dataSource1);
 
-  constructor(private prodService: ProductsService) {}
+  constructor(private router: Router, private prodService: ProductsService) {}
   ngOnInit(): void {
     this.prodService.getCart('').subscribe((res) => {
       this.dataSource.data = res;
@@ -26,5 +28,6 @@ export class ProductListComponent implements OnInit {
 
   agregarCarro(element: ProductListItem) {
     console.log(element);
+    this.router.navigate(['/orders/add-product', element.id]);
   }
 }
