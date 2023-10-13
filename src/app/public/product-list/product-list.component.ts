@@ -27,7 +27,6 @@ export class ProductListComponent implements OnInit {
   }
 
   agregarCarro(element: ProductListItem) {
-    console.log(element);
     this.router.navigate(['/orders/add-product', element.id]);
   }
 }

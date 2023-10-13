@@ -1,0 +1,60 @@
+<mat-card class="shipping-card" *ngIf="orderService.getActiveOrder() > 0">
+  <mat-card-header>
+    <mat-card-title>Orden</mat-card-title>
+  </mat-card-header>
+
+  <mat-card-content>
+    <div class="row">
+      <div class="col">Mesa N°: {{ mesa }}</div>
+      <div class="col">Observacion: {{ obs }}</div>
+    </div>
+  </mat-card-content>
+  <mat-card-actions>
+    <!-- <button mat-raised-button color="primary" type="submit">Crear Orden</button>
+   -->
+  </mat-card-actions>
+</mat-card>
+
+<form
+  [formGroup]="form"
+  novalidate
+  (ngSubmit)="onSubmit()"
+  *ngIf="orderService.getActiveOrder() == 0"
+>
+  <mat-card class="shipping-card">
+    <mat-card-header>
+      <mat-card-title>Orden</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <mat-label>Numero Mesa</mat-label>
+            <input
+              matInput
+              placeholder="mesa"
+              formControlName="mesa"
+              type="number"
+            />
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field class="full-width">
+            <mat-label>Observacion</mat-label>
+            <textarea
+              matInput
+              placeholder="obs"
+              formControlName="obs"
+            ></textarea>
+          </mat-form-field>
+        </div>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" type="submit">
+        Crear Orden
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</form>

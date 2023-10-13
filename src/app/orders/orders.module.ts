@@ -13,12 +13,15 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { OrdersRoutingModule } from './orders-routing.module';
 import { OrdersComponent } from './orders.component';
 import { ProductAddComponent } from './product-add/product-add.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MasterCreateViewComponent } from './master-create-view/master-create-view.component';
 
 
 @NgModule({
   declarations: [
     OrdersComponent,
-    ProductAddComponent
+    ProductAddComponent,
+    MasterCreateViewComponent
   ],
   imports: [
     CommonModule,
@@ -28,8 +31,10 @@ import { ProductAddComponent } from './product-add/product-add.component';
     MatSidenavModule,
     MatIconModule,
     MatListModule,
+    MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
+  
     MatRadioModule,
     MatCardModule,
     FormsModule, 

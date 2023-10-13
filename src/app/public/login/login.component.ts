@@ -28,8 +28,6 @@ export class LoginComponent {
       password: this.loginForm.get('password')?.value,
     };
 
-    console.log(loginData);
-
     this.authService.authenticateUser(loginData).subscribe((result) => {
       console.log(result.token);
       localStorage.setItem('access_token', JSON.stringify(result.token));
