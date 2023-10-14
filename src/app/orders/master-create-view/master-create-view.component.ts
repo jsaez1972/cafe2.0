@@ -3,6 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { OrderService } from 'src/app/_services/order.service';
 import { Output, EventEmitter } from '@angular/core';
+import { OrderCreate } from 'src/app/_interfaces/order-create';
 
 @Component({
   selector: 'app-master-create-view',
@@ -22,20 +23,31 @@ export class MasterCreateViewComponent implements OnInit {
     obs: [null],
   });
 
-  constructor(
-    private route: ActivatedRoute,
-    public orderService: OrderService
-  ) {}
+  constructor(public orderService: OrderService) {}
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe((params) => {
-      this.id = Number(params.get('idp'));
-      console.log('cabecera' + this.id);
-    });
+    let ido = this.orderService.getActiveOrder();
+    if (ido > 0) this.loadOrder(ido);
   }
 
   onSubmit() {
-    this.orderService.setActiveOrder(55);
-    this.newOrderEvent.emit();
+    let order: OrderCreate = {
+      idVendor: 1,
+      tableNumber: Number(this.form.get('mesa')?.value),
+      comments: this.form.get('obs')?.value!,
+    };
+
+    this.orderService.create(order).subscribe((idorder) => {
+      this.loadOrder(idorder);
+      this.orderService.setActiveOrder(idorder);
+      this.newOrderEvent.emit();
+    });
+  }
+
+  loadOrder(idorder: number) {
+    this.orderService.getPorId(idorder).subscribe((order) => {
+      this.mesa = order.tableNumber.toString();
+      this.obs = order.comments;
+    });
   }
 }
