@@ -1,6 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { OrderCreateItem } from 'src/app/_interfaces/order-create-item';
 import { OrderService } from 'src/app/_services/order.service';
 import { ProductsService } from 'src/app/_services/products.service';
 
@@ -48,6 +49,15 @@ export class ProductAddComponent implements OnInit {
   }
 
   onSubmit() {
-    this.router.navigate(['/public/products']);
+    let orderItem: OrderCreateItem = {
+      idProduct: this.id,
+      unitPrice: this.priceProduct,
+      quantity: Number(this.form.get('quantity')?.value),
+      idOrder: this.orderService.getActiveOrder(),
+    };
+
+    this.orderService.createItem(orderItem).subscribe(() => {
+      this.router.navigate(['/public/products']);
+    });
   }
 }

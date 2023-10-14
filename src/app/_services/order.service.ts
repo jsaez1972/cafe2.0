@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
 import { Order } from '../_interfaces/order';
+import { OrderCreateItem } from '../_interfaces/order-create-item';
 
 @Injectable({
   providedIn: 'root',
@@ -26,5 +27,9 @@ export class OrderService {
 
   getPorId(id: number): Observable<Order> {
     return this.http.get<any>(this.basePath + `/${id}`);
+  }
+
+  createItem(orderItem: OrderCreateItem): Observable<null> {
+    return this.http.post<any>(this.basePath + '/CreateItem', orderItem);
   }
 }
