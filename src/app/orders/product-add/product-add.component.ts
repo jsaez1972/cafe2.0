@@ -2,6 +2,7 @@ import { Component, OnInit, inject } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { OrderCreateItem } from 'src/app/_interfaces/order-create-item';
+import { CartNotificationService } from 'src/app/_services/cart-notification.service';
 import { OrderService } from 'src/app/_services/order.service';
 import { ProductsService } from 'src/app/_services/products.service';
 
@@ -22,11 +23,8 @@ export class ProductAddComponent implements OnInit {
   });
 
   constructor(
-    private route: ActivatedRoute,
-    private prodService: ProductsService,
-    public orderService: OrderService,
-    private router: Router
-  ) {}
+    private route: ActivatedRoute, private prodService: ProductsService, public orderService: OrderService,
+    private router: Router, private cartNotifica: CartNotificationService ) {}
 
   ngOnInit(): void {
     this.orderExist = this.orderService.getActiveOrder() > 0;
@@ -57,7 +55,15 @@ export class ProductAddComponent implements OnInit {
     };
 
     this.orderService.createItem(orderItem).subscribe(() => {
+      this.notificaTotalOrder(this.orderService.getActiveOrder());
       this.router.navigate(['/public/products']);
     });
   }
+
+  notificaTotalOrder(idorder: number) {
+    this.orderService.getPorId(idorder).subscribe((order) => {
+      this.cartNotifica.setValue(order.total);
+    });
+  }
+
 }

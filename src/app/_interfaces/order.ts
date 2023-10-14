@@ -3,6 +3,7 @@ export interface Order {
   idVendor: number;
   tableNumber: number;
   comments: string;
+  total: number;
   items: OrderItem[];
 }
 
