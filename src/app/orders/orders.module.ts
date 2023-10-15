@@ -15,13 +15,16 @@ import { OrdersComponent } from './orders.component';
 import { ProductAddComponent } from './product-add/product-add.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MasterCreateViewComponent } from './master-create-view/master-create-view.component';
+import { OrderDetailComponent } from './order-detail/order-detail.component';
+import { MatTableModule } from '@angular/material/table';
 
 
 @NgModule({
   declarations: [
     OrdersComponent,
     ProductAddComponent,
-    MasterCreateViewComponent
+    MasterCreateViewComponent,
+    OrderDetailComponent
   ],
   imports: [
     CommonModule,
@@ -34,7 +37,7 @@ import { MasterCreateViewComponent } from './master-create-view/master-create-vi
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
-  
+    MatTableModule,  
     MatRadioModule,
     MatCardModule,
     FormsModule, 

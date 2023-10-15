@@ -3,6 +3,8 @@ import { Component, inject } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/_services/auth.service';
+import { CartNotificationService } from 'src/app/_services/cart-notification.service';
+import { OrderService } from 'src/app/_services/order.service';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +18,12 @@ export class LoginComponent {
     password: [null, Validators.required],
   });
 
-  constructor(private router: Router, private authService: AuthService) {}
+  constructor(
+    private router: Router,
+    private authService: AuthService,
+    private orderService: OrderService,
+    private cartNotifica: CartNotificationService
+  ) {}
 
   onSubmit(): void {
     if (this.loginForm.invalid) {
@@ -29,9 +36,22 @@ export class LoginComponent {
     };
 
     this.authService.authenticateUser(loginData).subscribe((result) => {
-      console.log(result.token);
       localStorage.setItem('access_token', JSON.stringify(result.token));
+      this.checkNotificaTotalOrder();
       this.router.navigate(['/public/products']);
     });
   }
+
+
+  
+  checkNotificaTotalOrder() {
+    if (this.orderService.getActiveOrder() > 0) {
+      let idorden = this.orderService.getActiveOrder();
+      this.orderService.getPorId(idorden).subscribe((order) => {
+        this.cartNotifica.setValue(order.total);
+      });
+    }
+  }
+
+
 }

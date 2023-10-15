@@ -3,6 +3,8 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { CartNotificationService } from '../_services/cart-notification.service';
+import { Router } from '@angular/router';
+import { OrderService } from '../_services/order.service';
 
 @Component({
   selector: 'app-navegation',
@@ -20,10 +22,23 @@ export class NavegationComponent implements OnInit {
       shareReplay()
     );
 
-  constructor(private cartNotifica: CartNotificationService) {}
+  constructor(
+    private cartNotifica: CartNotificationService,
+    private router: Router,
+    private orderService: OrderService
+  ) {}
+
   ngOnInit(): void {
     this.cartNotifica.getValue().subscribe((val) => {
       this.totalCart = val;
     });
   }
+
+  goCart() {
+    this.router.navigate([
+      '/orders/detail',
+      this.orderService.getActiveOrder(),
+    ]);
+  }
+
 }
