@@ -3,7 +3,7 @@ import { OrderCreate } from '../_interfaces/order-create';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
-import { Order } from '../_interfaces/order';
+import { Order, OrderItem } from '../_interfaces/order';
 import { OrderCreateItem } from '../_interfaces/order-create-item';
 
 @Injectable({
@@ -31,5 +31,19 @@ export class OrderService {
 
   createItem(orderItem: OrderCreateItem): Observable<null> {
     return this.http.post<any>(this.basePath + '/CreateItem', orderItem);
+  }
+
+  updateStatus(idOrder: number, status: number): Observable<null> {
+    return this.http.put<any>(
+      this.basePath + `/UpdateStatus/${idOrder}/${status}`,
+      null
+    );
+  }
+
+  updateItem(idOrderItem: number, quantity: number): Observable<any> {
+    return this.http.put<any>(
+      this.basePath + `/Item/Update/${idOrderItem}/${quantity}`,
+      null
+    );
   }
 }

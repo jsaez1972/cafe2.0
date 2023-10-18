@@ -1,6 +1,5 @@
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -21,10 +20,14 @@ import { MatSortModule } from '@angular/material/sort';
 import { JwtModule } from '@auth0/angular-jwt';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AuthInterceptor } from './_services/auth-interceptor';
-
+import { registerLocaleData } from '@angular/common';
+import localeEsCL from '@angular/common/locales/es-CL';
 export function tokenGetter() {
   return localStorage.getItem('access_token');
 }
+
+registerLocaleData(localeEsCL, 'es-CL');
+
 @NgModule({
   declarations: [AppComponent, NavegationComponent],
   imports: [
@@ -56,6 +59,7 @@ export function tokenGetter() {
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    { provide: LOCALE_ID, useValue: 'es-CL' },
   ],
   bootstrap: [AppComponent],
 })
