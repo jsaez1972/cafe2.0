@@ -13,14 +13,14 @@
         mat-list-item
         href="#"
         [routerLink]="['/admin/products']"
-        *ngIf="authService.isAuthenticated()"
+        *ngIf="authService.isAuthenticated() && authService.getRole() == 1"
         >Admin. Productos</a
       >
       <a
         mat-list-item
         href="#"
         [routerLink]="['/admin/materials']"
-        *ngIf="authService.isAuthenticated()"
+        *ngIf="authService.isAuthenticated() && authService.getRole() == 1"
         >Admin. Insumos</a
       >
       <a mat-list-item href="#" [routerLink]="['/public/products']"
@@ -53,7 +53,7 @@
         <mat-icon>shopping_cart</mat-icon>
       </button>
       <span *ngIf="authService.isAuthenticated()"
-        >({{ totalCart | currency : '$' }})</span
+        >({{ totalCart | currency : "$" }})</span
       >
     </mat-toolbar>
     <!-- Add Content Here -->

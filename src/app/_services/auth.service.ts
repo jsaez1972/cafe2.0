@@ -19,8 +19,20 @@ export class AuthService {
     return token;
   }
 
+  setToken(token: any) {
+    localStorage.setItem('access_token', token);
+  }
+
   public isAuthenticated(): boolean {
     let token = localStorage.getItem('access_token');
     return !this.jwtHelper.isTokenExpired(token);
+  }
+
+  public getRole(): number {
+    let token = localStorage.getItem('access_token');
+    let decode = this.jwtHelper.decodeToken(token!);
+    const decodedRole =
+      decode['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
+    return decodedRole;
   }
 }

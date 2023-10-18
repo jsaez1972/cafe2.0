@@ -38,15 +38,7 @@ export class LoginComponent {
     };
 
     this.authService.authenticateUser(loginData).subscribe((result) => {
-      localStorage.setItem('access_token', JSON.stringify(result.token));
-
-      let decode = this.jwtHelper.decodeToken(result.token);
-      console.log(decode);
-      const decodedRole =
-        decode['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
-
-      console.log(decodedRole);
-
+      this.authService.setToken(JSON.stringify(result.token));
       this.checkNotificaTotalOrder();
       this.router.navigate(['/public/products']);
     });
