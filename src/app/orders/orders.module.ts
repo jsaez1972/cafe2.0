@@ -17,14 +17,18 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MasterCreateViewComponent } from './master-create-view/master-create-view.component';
 import { OrderDetailComponent } from './order-detail/order-detail.component';
 import { MatTableModule } from '@angular/material/table';
-
+import { OrderDetailEditDialogComponent } from './order-detail-edit-dialog/order-detail-edit-dialog.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { OrderDetailDeleteDialogComponent } from './order-detail-delete-dialog/order-detail-delete-dialog.component';
 
 @NgModule({
   declarations: [
     OrdersComponent,
     ProductAddComponent,
     MasterCreateViewComponent,
-    OrderDetailComponent
+    OrderDetailComponent,
+    OrderDetailEditDialogComponent,
+    OrderDetailDeleteDialogComponent,
   ],
   imports: [
     CommonModule,
@@ -37,11 +41,12 @@ import { MatTableModule } from '@angular/material/table';
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
-    MatTableModule,  
+    MatTableModule,
     MatRadioModule,
     MatCardModule,
-    FormsModule, 
-    ReactiveFormsModule
-  ]
+    MatDialogModule,
+    FormsModule,
+    ReactiveFormsModule,
+  ],
 })
-export class OrdersModule { }
+export class OrdersModule {}

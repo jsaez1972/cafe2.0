@@ -32,7 +32,6 @@ export class ProductAddDialogComponent implements OnInit {
   }
 
   doAction() {
-    console.log(this.form);
     if (this.form.invalid) {
       return;
     }

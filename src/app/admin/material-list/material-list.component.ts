@@ -45,7 +45,7 @@ export class MaterialListComponent implements OnInit {
   }
 
   openDialogEdit(obj: MaterialListItem) {
-    const dialogRef = this.dialog.open(MaterialEditDialogComponent, {
+    let dialogRef = this.dialog.open(MaterialEditDialogComponent, {
       width: '350px',
       data: obj,
     });
@@ -57,4 +57,6 @@ export class MaterialListComponent implements OnInit {
         });
     });
   }
+
+  openDialogDelete(obj: MaterialListItem) {}
 }

@@ -1,0 +1,18 @@
+<!-- dialog-box.component.html -->
+<h1 mat-dialog-title><strong>Modificar Item: {{ nameProduct }}</strong></h1>
+
+<div mat-dialog-content [formGroup]="form">
+  <mat-form-field>
+    <mat-label>Cantidad</mat-label>
+    <input matInput placeholder="cantidad" formControlName="quantity" />
+    <mat-error *ngIf="form.controls['quantity'].hasError('quantity')">
+      cantidad es <strong>obligatorio</strong>
+    </mat-error>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="doAction()">Guardar</button>
+  <button mat-button (click)="closeDialog()" mat-flat-button color="warn">
+    Cancel
+  </button>
+</div>

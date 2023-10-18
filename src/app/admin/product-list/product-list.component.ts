@@ -56,4 +56,6 @@ export class ProductListComponent implements OnInit {
         });
     });
   }
+
+  openDialogDelete(obj: ProductListItem) {}
 }

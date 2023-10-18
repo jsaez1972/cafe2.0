@@ -5,6 +5,7 @@ import { map, shareReplay } from 'rxjs/operators';
 import { CartNotificationService } from '../_services/cart-notification.service';
 import { Router } from '@angular/router';
 import { OrderService } from '../_services/order.service';
+import { AuthService } from '../_services/auth.service';
 
 @Component({
   selector: 'app-navegation',
@@ -25,7 +26,8 @@ export class NavegationComponent implements OnInit {
   constructor(
     private cartNotifica: CartNotificationService,
     private router: Router,
-    private orderService: OrderService
+    private orderService: OrderService,
+    public authService: AuthService
   ) {}
 
   ngOnInit(): void {
@@ -40,5 +42,4 @@ export class NavegationComponent implements OnInit {
       this.orderService.getActiveOrder(),
     ]);
   }
-
 }
