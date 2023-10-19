@@ -33,9 +33,9 @@ export class OrderService {
     return this.http.post<any>(this.basePath + '/CreateItem', orderItem);
   }
 
-  updateStatus(idOrder: number, status: number): Observable<null> {
+  update(idOrder: number, status: number, tip: number): Observable<null> {
     return this.http.put<any>(
-      this.basePath + `/UpdateStatus/${idOrder}/${status}`,
+      this.basePath + `/${idOrder}/${status}/${tip}`,
       null
     );
   }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
 import { OrderItem } from 'src/app/_interfaces/order';
@@ -7,6 +7,7 @@ import { OrderService } from 'src/app/_services/order.service';
 import { OrderDetailEditDialogComponent } from '../order-detail-edit-dialog/order-detail-edit-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { OrderDetailDeleteDialogComponent } from '../order-detail-delete-dialog/order-detail-delete-dialog.component';
+import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-order-detail',
@@ -29,6 +30,12 @@ export class OrderDetailComponent implements OnInit {
   mesa: number = 0;
   obs: string = '';
   total: number = 0;
+
+  private fb = inject(FormBuilder);
+  form = this.fb.group({
+    tip: [0],
+  });
+
   constructor(
     private orderService: OrderService,
     private route: ActivatedRoute,
@@ -50,13 +57,16 @@ export class OrderDetailComponent implements OnInit {
       this.obs = order.comments;
       this.total = order.total;
       this.dataSource.data = order.items;
+
+      this.form.get('tip')?.setValue(order.total * 0.1);
     });
   }
 
-  changeStatus() {
-    this.orderService.updateStatus(this.orderId, 1).subscribe((x) => {
-      localStorage.removeItem('active_order');
+  sendOrder() {
+    let tip = this.form.get('tip')?.value;
 
+    this.orderService.update(this.orderId, 1, Number(tip)).subscribe((x) => {
+      localStorage.removeItem('active_order');
       localStorage.removeItem('monto_order');
       this.cartNotifica.setValue(0);
       this.router.navigate(['/public/products']);

@@ -67,15 +67,20 @@
       <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
       <tr mat-footer-row *matFooterRowDef="displayedColumns; sticky: true"></tr>
     </table>
+
+    <mat-form-field [formGroup]="form">
+      <mat-label>Propina</mat-label>
+      <input matInput placeholder="propina" formControlName="tip" />
+    </mat-form-field>
   </mat-card-content>
+
   <mat-card-actions>
     <button
       mat-raised-button
       color="primary"
       type="submit"
-      (click)="changeStatus()"
-    >
-      Solicitar
+      (click)="sendOrder()" >
+      Crear Orden
     </button>
   </mat-card-actions>
 </mat-card>
