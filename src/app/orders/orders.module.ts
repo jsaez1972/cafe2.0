@@ -21,6 +21,7 @@ import { OrderDetailEditDialogComponent } from './order-detail-edit-dialog/order
 import { MatDialogModule } from '@angular/material/dialog';
 import { OrderDetailDeleteDialogComponent } from './order-detail-delete-dialog/order-detail-delete-dialog.component';
 import { OrderListComponent } from './order-list/order-list.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { OrderListComponent } from './order-list/order-list.component';
     MatInputModule,
     MatSelectModule,
     MatTableModule,
+    MatPaginatorModule,
     MatRadioModule,
     MatCardModule,
     MatDialogModule,

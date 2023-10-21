@@ -14,6 +14,7 @@ import { AuthService } from '../_services/auth.service';
 })
 export class NavegationComponent implements OnInit {
   totalCart = 0;
+  UserAutenticado = '';
   private breakpointObserver = inject(BreakpointObserver);
 
   isHandset$: Observable<boolean> = this.breakpointObserver
@@ -34,12 +35,19 @@ export class NavegationComponent implements OnInit {
     this.cartNotifica.getValue().subscribe((val) => {
       this.totalCart = val;
     });
+
+    let key = this.authService.getNameVendor();
+    if (key.length > 0) this.UserAutenticado = key.split('#', 2)[1];
   }
 
   goCart() {
-    this.router.navigate([
-      '/orders/detail',
-      this.orderService.getActiveOrder(),
-    ]);
+    let idorder = this.orderService.getActiveOrder();
+    if (idorder > 0) this.router.navigate(['/orders/detail', idorder]);
+  }
+
+  logout() {
+    localStorage.removeItem('access_token');
+    localStorage.removeItem('active_order');
+    localStorage.removeItem('monto_order');
   }
 }

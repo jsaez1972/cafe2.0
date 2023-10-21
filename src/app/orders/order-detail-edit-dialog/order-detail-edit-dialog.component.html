@@ -4,7 +4,7 @@
 <div mat-dialog-content [formGroup]="form">
   <mat-form-field>
     <mat-label>Cantidad</mat-label>
-    <input matInput placeholder="cantidad" formControlName="quantity" />
+    <input matInput placeholder="cantidad" formControlName="quantity" type="number" />
     <mat-error *ngIf="form.controls['quantity'].hasError('quantity')">
       cantidad es <strong>obligatorio</strong>
     </mat-error>

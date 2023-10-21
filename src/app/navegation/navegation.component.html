@@ -33,8 +33,22 @@
       <a mat-list-item href="#" [routerLink]="['/public/products']"
         >Productos</a
       >
-      <a mat-list-item href="#" [routerLink]="['/public/login']"
-        ><mat-icon aria-hidden="false">login</mat-icon> Login</a
+      <a
+        mat-list-item
+        href="#"
+        [routerLink]="['/public/login']"
+        *ngIf="!authService.isAuthenticated()"
+      >
+        <mat-icon aria-hidden="false">login</mat-icon> Login</a
+      >
+
+      <a
+        mat-list-item
+        href="#"
+        *ngIf="authService.isAuthenticated()"
+        (click)="logout()"
+      >
+        <mat-icon aria-hidden="false">logout</mat-icon> Logout</a
       >
     </mat-nav-list>
   </mat-sidenav>
@@ -52,6 +66,7 @@
 
       <span>cafe Entre amig@s</span>
       <span class="example-spacer"></span>
+      {{ UserAutenticado }}
       <button
         *ngIf="authService.isAuthenticated()"
         mat-icon-button

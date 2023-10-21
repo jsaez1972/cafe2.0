@@ -18,7 +18,7 @@
   </mat-form-field>
   <mat-form-field>
     <mat-label>Precio</mat-label>
-    <input matInput placeholder="price" formControlName="price" />
+    <input matInput placeholder="price" formControlName="price" type="number" />
     <mat-error *ngIf="form.controls['price'].hasError('price')">
       Precio is <strong>precio</strong>
     </mat-error>

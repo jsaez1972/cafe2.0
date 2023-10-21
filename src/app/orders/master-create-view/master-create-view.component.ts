@@ -36,8 +36,7 @@ export class MasterCreateViewComponent implements OnInit {
 
   onSubmit() {
     let key = this.authService.getNameVendor();
-    console.log(key);
-
+   
     let order: OrderCreate = {
       idVendor: Number(key.split('#', 2)[0]),
       tableNumber: Number(this.form.get('mesa')?.value),

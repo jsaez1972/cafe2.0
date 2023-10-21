@@ -10,7 +10,7 @@
   </mat-form-field>
   <mat-form-field>
     <mat-label>Stock</mat-label>
-    <input matInput placeholder="stock" formControlName="stock" />
+    <input matInput placeholder="stock" formControlName="stock" type="number" />
     <mat-error *ngIf="form.controls['stock'].hasError('stock')">
       stock is <strong>stock</strong>
     </mat-error>

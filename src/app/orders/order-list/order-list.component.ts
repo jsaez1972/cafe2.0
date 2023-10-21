@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Order } from 'src/app/_interfaces/order';
 import { OrderService } from 'src/app/_services/order.service';
@@ -20,11 +21,13 @@ export class OrderListComponent implements OnInit {
   ];
   dataSource1: Order[] = [];
   dataSource = new MatTableDataSource(this.dataSource1);
+  @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
 
   constructor(private orderService: OrderService) {}
   ngOnInit(): void {
     this.orderService.getAlls().subscribe((res) => {
       this.dataSource.data = res;
+      this.dataSource.paginator = this.paginator;
     });
   }
 
