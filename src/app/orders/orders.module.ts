@@ -20,6 +20,7 @@ import { MatTableModule } from '@angular/material/table';
 import { OrderDetailEditDialogComponent } from './order-detail-edit-dialog/order-detail-edit-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { OrderDetailDeleteDialogComponent } from './order-detail-delete-dialog/order-detail-delete-dialog.component';
+import { OrderListComponent } from './order-list/order-list.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { OrderDetailDeleteDialogComponent } from './order-detail-delete-dialog/o
     OrderDetailComponent,
     OrderDetailEditDialogComponent,
     OrderDetailDeleteDialogComponent,
+    OrderListComponent,
   ],
   imports: [
     CommonModule,

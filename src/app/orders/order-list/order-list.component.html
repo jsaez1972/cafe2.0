@@ -1,0 +1,70 @@
+<h2>Administracion Ordenes</h2>
+
+<mat-form-field appearance="fill">
+  <mat-label> Filtrar </mat-label>
+  <input
+    matInput
+    (keyup)="applyFilter($event)"
+    placeholder="Buscar Informacion "
+    #input
+  />
+  <mat-icon matPrefix>search</mat-icon>
+</mat-form-field>
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+  <!-- Position Column -->
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef>Id</th>
+    <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+  </ng-container>
+  <!-- Name Column -->
+  <ng-container matColumnDef="nameVendor">
+    <th mat-header-cell *matHeaderCellDef>Orden Ingresada por</th>
+    <td mat-cell *matCellDef="let element">{{ element.nameVendor }}</td>
+  </ng-container>
+  <!-- Name Column -->
+  <ng-container matColumnDef="tableNumber">
+    <th mat-header-cell *matHeaderCellDef>Mesa</th>
+    <td mat-cell *matCellDef="let element">{{ element.tableNumber }}</td>
+  </ng-container>
+  <!-- Name Column -->
+  <ng-container matColumnDef="total">
+    <th mat-header-cell *matHeaderCellDef>Total</th>
+    <td mat-cell *matCellDef="let element">
+      {{ element.total | currency : "$" }}
+    </td>
+  </ng-container>
+  <!-- Weight Column -->
+  <ng-container matColumnDef="tip">
+    <th mat-header-cell *matHeaderCellDef>Propina</th>
+    <td mat-cell *matCellDef="let element">
+      {{ element.tip | currency : "$" }}
+    </td>
+  </ng-container>
+  <!-- Weight Column -->
+  <ng-container matColumnDef="status">
+    <th mat-header-cell *matHeaderCellDef>Estado</th>
+    <td mat-cell *matCellDef="let element">
+      {{ getDescripcionStatus(element.status) }}
+    </td>
+  </ng-container>
+  <!-- Name Column -->
+  <ng-container matColumnDef="createdDate">
+    <th mat-header-cell *matHeaderCellDef>Fecha Creacion</th>
+    <td mat-cell *matCellDef="let element">
+      {{ element.createdDate | date : "dd-MM-yyyy HH:mm" }}
+    </td>
+  </ng-container>
+  <!-- Name Column -->
+  <ng-container matColumnDef="action">
+    <th mat-header-cell *matHeaderCellDef>Action</th>
+    <td mat-cell *matCellDef="let element" class="action-link">
+      <button mat-icon-button color="primary">
+        <mat-icon>shopping_cart</mat-icon>
+      </button>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+</table>

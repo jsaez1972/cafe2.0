@@ -31,8 +31,15 @@ export class AuthService {
   public getRole(): number {
     let token = localStorage.getItem('access_token');
     let decode = this.jwtHelper.decodeToken(token!);
-    const decodedRole =
-      decode['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
+    let decodedRole =  decode['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
+
+    return Number( decodedRole);
+  }
+  public getNameVendor(): string {
+    let token = localStorage.getItem('access_token');
+    let decode = this.jwtHelper.decodeToken(token!);
+    let decodedRole =  decode['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name'];
+    
     return decodedRole;
   }
 }

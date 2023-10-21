@@ -12,6 +12,13 @@
       <a
         mat-list-item
         href="#"
+        [routerLink]="['/orders/list']"
+        *ngIf="authService.isAuthenticated() && authService.getRole() == 1"
+        >Admin. Ordenes</a
+      >
+      <a
+        mat-list-item
+        href="#"
         [routerLink]="['/admin/products']"
         *ngIf="authService.isAuthenticated() && authService.getRole() == 1"
         >Admin. Productos</a
@@ -26,7 +33,9 @@
       <a mat-list-item href="#" [routerLink]="['/public/products']"
         >Productos</a
       >
-      <a mat-list-item href="#" [routerLink]="['/public/login']">Login</a>
+      <a mat-list-item href="#" [routerLink]="['/public/login']"
+        ><mat-icon aria-hidden="false">login</mat-icon> Login</a
+      >
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>

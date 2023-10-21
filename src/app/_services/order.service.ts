@@ -12,6 +12,7 @@ import { OrderCreateItem } from '../_interfaces/order-create-item';
 export class OrderService {
   basePath = environment.apiUrl + 'api/Orders';
   constructor(private http: HttpClient) {}
+
   getActiveOrder(): number {
     let order = localStorage.getItem('active_order');
     if (order == undefined) return 0;
@@ -45,5 +46,9 @@ export class OrderService {
       this.basePath + `/Item/Update/${idOrderItem}/${quantity}`,
       null
     );
+  }
+
+  getAlls(): Observable<Order[]> {
+    return this.http.get<any>(this.basePath + `/0/30/kk`);
   }
 }

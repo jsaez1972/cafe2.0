@@ -33,7 +33,7 @@ export class LoginComponent {
     }
 
     let loginData = {
-      email: this.loginForm.get('userName')?.value,
+      username: this.loginForm.get('userName')?.value,
       password: this.loginForm.get('password')?.value,
     };
 

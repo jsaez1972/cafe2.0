@@ -1,9 +1,10 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, numberAttribute } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { OrderService } from 'src/app/_services/order.service';
 import { Output, EventEmitter } from '@angular/core';
 import { OrderCreate } from 'src/app/_interfaces/order-create';
+import { AuthService } from 'src/app/_services/auth.service';
 
 @Component({
   selector: 'app-master-create-view',
@@ -23,7 +24,10 @@ export class MasterCreateViewComponent implements OnInit {
     obs: [null],
   });
 
-  constructor(public orderService: OrderService) {}
+  constructor(
+    public orderService: OrderService,
+    private authService: AuthService
+  ) {}
 
   ngOnInit(): void {
     let ido = this.orderService.getActiveOrder();
@@ -31,8 +35,11 @@ export class MasterCreateViewComponent implements OnInit {
   }
 
   onSubmit() {
+    let key = this.authService.getNameVendor();
+    console.log(key);
+
     let order: OrderCreate = {
-      idVendor: 1,
+      idVendor: Number(key.split('#', 2)[0]),
       tableNumber: Number(this.form.get('mesa')?.value),
       comments: this.form.get('obs')?.value!,
     };

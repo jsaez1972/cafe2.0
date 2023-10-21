@@ -4,6 +4,8 @@ export interface Order {
   tableNumber: number;
   comments: string;
   total: number;
+  tip: number;
+  status: number;
   items: OrderItem[];
 }
 
