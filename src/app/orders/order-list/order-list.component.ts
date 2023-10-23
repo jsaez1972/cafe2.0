@@ -1,7 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { catchError, map, of, startWith, switchMap } from 'rxjs';
 import { Order } from 'src/app/_interfaces/order';
+import { OrderPagedList } from 'src/app/_interfaces/order-paged-list';
 import { OrderService } from 'src/app/_services/order.service';
 
 @Component({
@@ -21,19 +23,33 @@ export class OrderListComponent implements OnInit {
   ];
   dataSource1: Order[] = [];
   dataSource = new MatTableDataSource(this.dataSource1);
-  @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
+  totalElements = 0;
+  pageSize = 10;
+  currentPage = 0;
+
+  //  @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
 
   constructor(private orderService: OrderService) {}
   ngOnInit(): void {
-    this.orderService.getAlls().subscribe((res) => {
-      this.dataSource.data = res;
-      this.dataSource.paginator = this.paginator;
-    });
+    this.getdata();
   }
 
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
+  getdata() {
+    this.orderService
+      .getPaged(this.pageSize, this.currentPage)
+      .subscribe((res) => {
+        this.dataSource.data = res.rows;
+        //      this.dataSource.paginator = this.paginator;
+
+        this.totalElements = res.totalRows;
+      });
+  }
+
+  nextPage(event: PageEvent) {
+    const request = {};
+    this.currentPage = event.pageIndex;
+    this.pageSize = event.pageSize;
+    this.getdata();
   }
 
   getDescripcionStatus(status: number) {

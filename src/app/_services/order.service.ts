@@ -5,6 +5,7 @@ import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
 import { Order, OrderItem } from '../_interfaces/order';
 import { OrderCreateItem } from '../_interfaces/order-create-item';
+import { OrderPagedList } from '../_interfaces/order-paged-list';
 
 @Injectable({
   providedIn: 'root',
@@ -48,7 +49,7 @@ export class OrderService {
     );
   }
 
-  getAlls(): Observable<Order[]> {
-    return this.http.get<any>(this.basePath + `/0/30/kk`);
+  getPaged(pagesize: number, currentPage: number): Observable<OrderPagedList> {
+    return this.http.get<any>(this.basePath + `/${currentPage}/${pagesize}/kk`);
   }
 }
